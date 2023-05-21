@@ -1,0 +1,61 @@
+ // autoCarousel(){
+        //     setTimeout(() => {
+        //         if(this.visibleSlide < this.dishCarouselImages.length - 1) {
+        //             this.visibleSlide++
+        //             if(this.visibleSlide < this.dishCarouselImages.length-1){
+        //                 this.countIndicatorshow++
+        //                 this.countercountIndicatorshow++
+        //             }
+        //         }else{
+        //             this.visibleSlide = 0
+        //             this.countIndicatorshow = 3
+        //             this.countercountIndicatorshow = -2
+        //         }
+        //     }, 3000)
+        //     this.timeoutId = setTimeout(() => {
+        //         this.autoCarousel();
+        //     }, 3000);
+        // },
+        // toRight(){
+        //     clearTimeout(this.timeoutId);
+        //     if(this.visibleSlide < this.dishCarouselImages.length-1) {
+        //         this.visibleSlide++
+        //         if(this.visibleSlide < this.dishCarouselImages.length-1){
+        //             this.countIndicatorshow++
+        //             this.countercountIndicatorshow++
+        //         }
+        //     }else{
+        //         this.visibleSlide = 0
+        //         this.countIndicatorshow = 3
+        //         this.countercountIndicatorshow = -2
+        //     }
+        // },
+        // toLeft(){
+        //     clearTimeout(this.timeoutId);
+        //     if(this.visibleSlide > 0) {
+        //         this.visibleSlide--
+        //         if(this.visibleSlide > 0){
+        //             this.countIndicatorshow--
+        //             this.countercountIndicatorshow--
+        //         }
+        //     }
+        //     else{
+        //         this.visibleSlide = this.dishCarouselImages.length - 1
+        //         this.countIndicatorshow  = this.dishCarouselImages.length + 1
+        //         this.countercountIndicatorshow = this.dishCarouselImages.length - 4
+        //     }
+        // },
+        // indicatorSlide(index){
+        //     clearTimeout(this.timeoutId);
+        //     if(this.visibleSlide < this.dishCarouselImages.length - 1){
+        //         if(index > this.visibleSlide){
+        //             this.countIndicatorshow = this.countIndicatorshow + 1
+        //             this.countercountIndicatorshow = this.countercountIndicatorshow + 1
+        //         }
+        //         else{
+        //             this.countIndicatorshow = this.countIndicatorshow - 1
+        //             this.countercountIndicatorshow = this.countercountIndicatorshow - 1
+        //         }
+        //     }
+        //     this.visibleSlide = index
+        // }

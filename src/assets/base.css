@@ -1,0 +1,53 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --main-color-white: #ffffff;
+  --mainv2-color-yellow: #a36700;
+  --main-color-yellow: #FEAA1A;
+  --secondary-color-yellow: #ffc82a;
+  --third-color-yellow: #ffe32c;
+  --main-color-green: #1cc52b;
+  --secondary-color-green: #33cc40;
+  --third-color-green: #72f57d;
+  --main-color-black: #000000;
+  --secondary-v2-color-black: #050505;
+  --secondary-color-black: #161616;
+  --third-color-black: #383838;
+  --fourth-color-black: #4e4e4e;
+  --transparent-color-1: rgba(24, 24, 24, 0.4);
+  --transparent-color-2: rgba(24, 24, 24, 0.8);
+  --transparent-color-3: rgba(185, 185, 185, 0.4);
+  --transparent-color-4: rgba(185, 185, 185, 0.6);
+  --transparent-color-5: rgba(185, 185, 185);
+}
+
+/* font size  */
+:root{
+  /* normal letters */
+  --wide-default-font-size: 16px;
+  --ipad-default-font-size: 15px;
+  --mobile-default-font-size: 14px;
+
+  /* titles font size  */
+  --title-main-default-font-size: 50px;
+  --title-wide-default-font-size: 40px;
+  --title-ipad-default-font-size: 35px;
+  --title-mobile-default-font-size: 30px;
+
+    /* sub titles font size  */
+    --subtitle-wide-default-font-size: 30px;
+    --subtitle-ipad-default-font-size: 25px;
+    --subtitle-mobile-default-font-size: 20px;
+
+    /* icons */
+    --main-background-icons: rgba(176, 176, 177, 0.2);
+    --main-box-shadow:rgba(0, 0, 0, 0.1) 0px 2px 5px;
+}
+
+/* admin  */
+:root{
+  --admin-main-color: #eceaea;
+  --admin-main-blue-color: #1D1D41;
+  --admin-secondary-blue-color: #28274F;
+  --admin-primary-white-color: #b6b5b5;
+  --main-background-color: #EEF1F4;
+}
