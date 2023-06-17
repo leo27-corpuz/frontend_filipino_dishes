@@ -64,7 +64,7 @@ const router = createRouter({
             {
               path:'/admin/category/create',
               name: 'categoryadmincreate',
-              component: () => import('../components/admin/create/categoryCreateSubComponent.vue'),
+              component: () => import('../views/admin/category/create.vue'),
             },
           ]
         },
@@ -81,12 +81,12 @@ const router = createRouter({
         {
           path:'/admin/setting/logo',
           name: 'logoadmin',
-          component: () => import('../views/admin/settings/logo.vue'),
+          component: () => import('../views/admin/settings/logo/index.vue'),
         },
         {
           path:'/admin/setting/landing-page',
           name: 'landingpageadmin',
-          component: () => import('../views/admin/settings/landingpage.vue'),
+          component: () => import('../views/admin/settings/landingpage/index.vue'),
         },
         {
           path:'/admin/setting/whoweare',
@@ -101,24 +101,24 @@ const router = createRouter({
         {
           path:'/admin/setting/founders',
           name: 'foundersadmin',
-          component: () => import('../views/admin/settings/founder.vue'),
+          component: () => import('../views/admin/settings/founder/index.vue'),
           props: true,
           children: [
             {
               path:'/admin/setting/founders/create',
               name: 'founderadmincreate',
-              component: () => import('../components/admin/create/founderCreateSubComponent.vue'),
+              component: () => import('../views/admin/settings/founder/create.vue'),
             },
             {
               path:'/admin/setting/founders/update/:founder',
               name: 'founderadminupdate',
-              component: () => import('../components/admin/update/founderUpdateSubComponent.vue'),
+              component: () => import('../views/admin/settings/founder/update.vue'),
               props: true // This enables passing route params as props
             },
             {
               path:'/admin/setting/founders/view/:founder',
               name: 'founderadminview',
-              component: () => import('../components/admin/view/founderViewSubComponent.vue'),
+              component: () => import('../views/admin/settings/founder/view.vue'),
               props: true // This enables passing route params as props
             }
           ]

@@ -228,3 +228,55 @@ body::-webkit-scrollbar {
         transform: scale(1);
     }
 }
+
+.btn-create-choice{
+    display: flex;
+    grid-gap: 10px;
+    justify-content: right;
+}
+
+.backtopage1{
+    font-size: var(--mobile-default-font-size);
+    color: rgba(24, 24, 24, 0.5);
+    letter-spacing: 1px;
+    padding: 10px 12px;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    box-shadow: var(--main-box-shadow);
+    border-radius: 12px;
+    background: var(--main-background-color);
+    transition: all 0.5s ease-out;
+    white-space: nowrap;
+    font-weight: 600;
+}
+.backtopage1:hover{
+    color: var(--main-color-white);
+    background: var(--admin-secondary-blue-color);
+}
+
+.add-data > a > button{
+    background: var(--admin-main-blue-color);
+    border: none;
+    padding: 12px 15px;
+    border-radius: 7px;
+    width: auto;
+    font-size: var(--wide-default-font-size);
+    cursor: pointer;
+    letter-spacing: 1.7px;
+    color: var(--admin-primary-white-color);
+    transition: all 0.5s ease-out;
+}
+.add-data > a > button:hover{
+    color: var(--main-color-white);
+    background: var(--admin-secondary-blue-color);
+}
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}

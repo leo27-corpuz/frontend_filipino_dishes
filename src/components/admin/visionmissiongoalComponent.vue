@@ -8,12 +8,24 @@
             <div class="form-container">
                 <form @submit.prevent="submit">
                     <titleformComponent title="Our Vision, Mission and Goal Form"></titleformComponent>
-                    <inputsComponent :inputs="inputVision"></inputsComponent>
-                    <textareaComponent :textareas="textareasVision"></textareaComponent>
-                    <inputsComponent :inputs="inputMission"></inputsComponent>
-                    <textareaComponent :textareas="textareasMission"></textareaComponent>
-                    <inputsComponent :inputs="inputGoal"></inputsComponent>
-                    <textareaComponent :textareas="textareasGoal"></textareaComponent>
+                    <inputWrap class="wrap-input">
+                        <inputsComponent :input="inputVision" :errormessage="errorData"></inputsComponent>
+                    </inputWrap>
+                    <inputWrap class="wrap-textarea">
+                        <textareaComponent :textarea="textareasVision" :errormessage="errorData"></textareaComponent> 
+                    </inputWrap>
+                    <inputWrap class="wrap-input">
+                        <inputsComponent :input="inputMission" :errormessage="errorData"></inputsComponent>
+                    </inputWrap>
+                    <inputWrap class="wrap-textarea">
+                        <textareaComponent :textarea="textareasMission" :errormessage="errorData"></textareaComponent> 
+                    </inputWrap>
+                    <inputWrap class="wrap-input">
+                        <inputsComponent :input="inputGoal" :errormessage="errorData"></inputsComponent>
+                    </inputWrap>
+                    <inputWrap class="wrap-textarea">
+                        <textareaComponent :textarea="textareasGoal" :errormessage="errorData"></textareaComponent> 
+                    </inputWrap>
                     <buttonsComponent :statusSubmit="statusSubmitVMG" :buttonTitle="aboutUsVMGBtn"></buttonsComponent>
                 </form>
             </div>
@@ -25,92 +37,81 @@
         </loadingCompoent>
     </transition>
     <transition name="slide-fade">
-        <errorList v-if="errorMessage">
-            <p class="errormessage">{{ errorMessage }}</p>
-        </errorList>
-    </transition>
-    <transition name="slide-fade">
         <successPopup v-if="successMessage">
             <p class="successmessage">{{ successMessage }}</p>
         </successPopup>
     </transition>
 </template>
 <script>
-import inputsComponent from './reusable-forms/inputs.vue'
-import buttonsComponent from './reusable-forms/buttons.vue'
-import titleformComponent from './reusable-forms/titleform.vue'
-import textareaComponent from './reusable-forms/textarea.vue'
-import inputsFileComponent from './reusable-forms/inputsFile.vue'
+import inputsComponent from '../form/inputs.vue'
+import buttonsComponent from '../form/buttons.vue'
+import titleformComponent from '../form/titleform.vue'
+import textareaComponent from '../form/textarea.vue'
+import inputsFileComponent from '../form/inputsFile.vue'
 import axiosIntance from '../../composable/axios.comp.js'
 import skeleton from './skeletonLoading/skeleton-form.vue'
 import loadingCompoent from '../essentials/loadingCompoent.vue'
-import errorList from '../essentials/errorList.vue'
 import successPopup from '../essentials/successPopup.vue'
+import inputWrap from '../form/input-wrap.vue'
 export default{
     data(){
         return {
             // //vision, mission and goal
-            inputVision: [
-                {
-                    type: 'text',
-                    label: 'Vision',
-                    required: true,
-                    placeholder: 'Title',
-                    value: ''
-                },
-            ],
-            textareasVision: [
-                {
-                    label: 'Description Vision',
-                    required: true,
-                    placeholder: 'Vision',
-                    value: ''
-                },
-            ],
-            inputMission: [
-                {
-                    type: 'text',
-                    label: 'Mission',
-                    required: true,
-                    placeholder: 'Title',
-                    value: ''
-                },
-            ],
-            textareasMission: [
-                {
-                    label: 'Description Mission',
-                    required: true,
-                    placeholder: 'Mission',
-                    value: ''
-                },
-            ],
-            inputGoal: [
-                {
-                    type: 'text',
-                    label: 'Goal',
-                    required: true,
-                    placeholder: 'Title',
-                    value: ''
-                },
-            ],
-            textareasGoal: [
-                {
-                    label: 'Description Goal',
-                    required: true,
-                    placeholder: 'Goal',
-                    value: ''
-                },
-            ],
+            inputVision: {
+                type: 'text',
+                label: 'Vision',
+                required: true,
+                placeholder: 'Title',
+                value: '',
+                title: 'VisionTitle'
+            },
+            textareasVision: {
+                label: 'Description Vision',
+                required: true,
+                placeholder: 'Vision',
+                value: '',
+                title: 'VisionDescription'
+            },
+            inputMission: {
+                type: 'text',
+                label: 'Mission',
+                required: true,
+                placeholder: 'Title',
+                value: '',
+                title: 'MissionTitle'
+            },
+            textareasMission: {
+                label: 'Description Mission',
+                required: true,
+                placeholder: 'Mission',
+                value: '',
+                title: 'MissionDescription'
+            },
+            inputGoal: {
+                type: 'text',
+                label: 'Goal',
+                required: true,
+                placeholder: 'Title',
+                value: '',
+                title: 'GoalTitle'
+            },
+            textareasGoal: {
+                label: 'Description Goal',
+                required: true,
+                placeholder: 'Goal',
+                value: '',
+                title: 'GoalDescription'
+            },
             statusSubmitVMG: false,
             aboutUsVMGBtn: 'Submit',
-            errorMessage: '',
+            errorData: {},
             loadingMessage: '',
             statusLoad: false,
             successMessage: ''
         }
     },
     components: {
-        inputsComponent, buttonsComponent, titleformComponent, textareaComponent, inputsFileComponent, skeleton, loadingCompoent, errorList, successPopup
+        inputsComponent, buttonsComponent, titleformComponent, textareaComponent, inputsFileComponent, skeleton, loadingCompoent, successPopup, inputWrap
     },
     created(){
         const promisigetVMG = this.getVMGDdata();
@@ -123,16 +124,15 @@ export default{
     methods: {
         async submit(){
             this.statusSubmitVMG = !this.statusSubmitVMG
-            this.errorMessage = ''
             this.loadingMessage = 'Processing..'
             try {
                 const formData = new FormData();
-                formData.append('VisionTitle', this.inputVision[0].value);
-                formData.append('VisionDescription', this.textareasVision[0].value.replace(/(?:\r\n|\r|\n)/g, '<br>'));
-                formData.append('MissionTitle', this.inputMission[0].value);
-                formData.append('MissionDescription', this.textareasMission[0].value.replace(/(?:\r\n|\r|\n)/g, '<br>'));
-                formData.append('GoalTitle', this.inputGoal[0].value);
-                formData.append('GoalDescription', this.textareasGoal[0].value.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+                formData.append('VisionTitle', this.inputVision.value);
+                formData.append('VisionDescription', this.textareasVision.value.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+                formData.append('MissionTitle', this.inputMission.value);
+                formData.append('MissionDescription', this.textareasMission.value.replace(/(?:\r\n|\r|\n)/g, '<br>'));
+                formData.append('GoalTitle', this.inputGoal.value);
+                formData.append('GoalDescription', this.textareasGoal.value.replace(/(?:\r\n|\r|\n)/g, '<br>'));
                 const config = {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -143,7 +143,7 @@ export default{
                 setTimeout(() => {
                     this.statusSubmitVMG = !this.statusSubmitVMG
                     setTimeout(() => {
-                        this.errorMessage = ''
+                        this.errorData = {}
                         this.loadingMessage = ''
                         this.successMessage = 'Successful'
                         setTimeout(() => {
@@ -156,7 +156,7 @@ export default{
                     this.statusSubmitVMG = !this.statusSubmitVMG
                     setTimeout(() => {
                         this.loadingMessage = ''
-                        this.errorMessage = error.response.data
+                        this.errorData = error.response.data
                     }, 1000)
                 }, 900)
             }
@@ -171,12 +171,12 @@ export default{
                 const response = await axiosIntance.get('/api/admin/visionmissiongoal', config)
                 const res = await response.data
                 if(res.length > 0){
-                    this.inputVision[0].value = res[0].VisionTitle
-                    this.textareasVision[0].value = res[0].VisionDescription.replace(/(<br>)/g, '\n')
-                    this.inputMission[0].value = res[0].MissionTitle
-                    this.textareasMission[0].value = res[0].MissionDescription.replace(/(<br>)/g, '\n')
-                    this.inputGoal[0].value = res[0].GoalTitle
-                    this.textareasGoal[0].value = res[0].GoalDescription.replace(/(<br>)/g, '\n')
+                    this.inputVision.value = res[0].VisionTitle
+                    this.textareasVision.value = res[0].VisionDescription.replace(/(<br>)/g, '\n')
+                    this.inputMission.value = res[0].MissionTitle
+                    this.textareasMission.value = res[0].MissionDescription.replace(/(<br>)/g, '\n')
+                    this.inputGoal.value = res[0].GoalTitle
+                    this.textareasGoal.value = res[0].GoalDescription.replace(/(<br>)/g, '\n')
                 }
             } catch (error) {
                 console.log(error)

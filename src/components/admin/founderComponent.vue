@@ -32,7 +32,7 @@
 import VLazyImage from "v-lazy-image";
 import skeletoncard from './skeletonLoading/skeleton-card.vue'
 import axiosIntance from '../../composable/axios.comp.js'
-import nodataComponent from './reusable-forms/nodata.vue'
+import nodataComponent from '../form/nodata.vue'
 export default{
     data(){
         return {

@@ -1,15 +1,18 @@
 <template>
     <section>
-        <dashboardComponent />
+        <article>
+            <div class="title">
+                <p>Dashboard</p>
+            </div>
+        </article> 
     </section>
 </template>
 <script>
-import dashboardComponent from '../../../components/admin/dashboardComponent.vue'
 export default{
-    components: {
-        dashboardComponent
-    },
 }
 </script>
 <style scoped>
+    article {
+        width: 100% !important;
+    }
 </style>
