@@ -173,11 +173,11 @@ export default{
             },
             requestSource: null,
             LimitQuery: {
-                limit: '',
+                limit: this.$route.query.limit || '',
             },
             SortedQuery:{},
             SearchQuery: {
-                search: '',
+                search: this.$route.query.search || '',
             },
             deletion: {
                 title: "You're about to delete this Category",
@@ -202,10 +202,8 @@ export default{
         $route(to, from) {
             this.statusTableLoad = false
             if (to.fullPath !== from.fullPath) {
-                if (this.requestSource) {
-                    this.requestSource.cancel("URL parameters changed, cancelling Axios request.");
-                }
-                if(to.fullPath == '/admin/category') this.getCategoryData()
+                if(this.requestSource) this.requestSource.cancel("URL parameters changed, cancelling Axios request.");
+                if(to.path == '/admin/category') this.getCategoryData()
             }
         },
         '$route.query.page'(newval, oldVal){
@@ -230,6 +228,10 @@ export default{
         '$route.query.search'(newval, oldVal){
             this.SearchQuery.search = newval
         },
+    },
+    mounted(){
+        this.SortedQuery = { title: this.$route.query.title }
+        this.SortedQuery = { id: this.$route.query.id }
     },
     created(){
         const promisigetCategory = this.getCategoryData();
@@ -262,7 +264,6 @@ export default{
                 }
                 const response = await axiosIntance.get(path, config)
                 const res = await response.data
-                console.log(res)
                 this.tableDataBody = res.categoryData.rows
                 this.pagination.currentPage = res.currentPage
                 this.pagination.totalPages = res.totalPages
@@ -276,6 +277,7 @@ export default{
                 setTimeout(() => {
                     this.statusTableLoad = true
                 }, 500)
+                this.requestSource = null
             } catch (error) {
                 this.$router.push({ name: 'categoryadmin' })
                 console.log(error)

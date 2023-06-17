@@ -59,7 +59,7 @@ export default{
             }
         },
         generateRoute(limit){
-            return {name: this.pageName, query: {...this.SearchQuery, page: this.currentPage, ...this.SortedQuery,  limit: limit,}}
+            return {name: this.pageName, query: {...this.SearchQuery, page: this.currentPage, limit: limit, ...this.SortedQuery,}}
         },
     }
 }

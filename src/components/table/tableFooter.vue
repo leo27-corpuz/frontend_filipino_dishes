@@ -9,7 +9,7 @@
             </button>
             <div class="pages">
                 <router-link 
-                    :to="{name: 'categoryadmin',  query: { page: 1 }}"
+                :to="generateLastPage(1)"
                     v-if="pagination.currentPage >= 4"
                     class="fistLast"
                     >1</router-link>
@@ -21,7 +21,7 @@
                         >{{ page }}</router-link>
                 </template>
                 <router-link 
-                    :to="{name: 'categoryadmin',  query: { page: pagination.totalPages }}"
+                    :to="generateLastPage(pagination.totalPages)"
                     class="fistLast"
                     v-if="pagination.pageLimitView < pagination.totalPages"
                     >{{ pagination.totalPages }}</router-link>
@@ -48,9 +48,15 @@ export default{
         next(currentpage){
             this.$router.push({name: this.pageName, query: {...this.SearchQuery, page: currentpage+1, ...this.LimitQuery, ...this.SortedQuery}})
         },
-        generateRoute(page, pageName){
-            return {name: pageName, query: { ...this.SearchQuery, page: page, ...this.LimitQuery, ...this.SortedQuery}}
+        generateRoute(page){
+            return {name: this.pageName, query: { ...this.SearchQuery, page: page, ...this.LimitQuery, ...this.SortedQuery}}
         },
+        generateLastPage(page){
+            return {name: this.pageName, query: { ...this.SearchQuery, page: page, ...this.LimitQuery, ...this.SortedQuery}}
+        },
+        generateLastPage(page){
+            return {name: this.pageName, query: { ...this.SearchQuery, page: page, ...this.LimitQuery, ...this.SortedQuery}}
+        }
     }
 }
 </script>
